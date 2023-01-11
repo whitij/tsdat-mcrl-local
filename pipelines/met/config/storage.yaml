@@ -1,0 +1,8 @@
+classname: tsdat.io.storage.FileSystem
+parameters:
+  storage_root: storage/met
+  data_folder: netcdf
+  data_storage_path: "{storage_root}/{datastream}/{year}/{month}/{day}/{data_folder}"
+  ancillary_storage_path: "{storage_root}/{datastream}/{year}/{month}/{day}/{ancillary_folder}"
+handler:
+  classname: tsdat.io.handlers.NetCDFHandler

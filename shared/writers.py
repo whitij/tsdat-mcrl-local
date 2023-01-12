@@ -15,8 +15,7 @@ def write_parquet(dataset, instrument):
         "storage_root": Path.cwd() / "storage" / instrument,
         "data_folder": "parquet",
         "data_storage_path": Path(
-            "{storage_root}/{datastream}/{year}/{month}/{day}/{data_folder}"
-        ),
+            "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"        ),
     }
     storage_model = StorageConfig(
         classname="tsdat.io.storage.FileSystem", parameters=parameters

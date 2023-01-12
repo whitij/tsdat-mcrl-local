@@ -2,7 +2,7 @@ classname: tsdat.io.storage.FileSystem
 parameters:
   storage_root: storage/tide_gauge
   data_folder: netcdf
-  data_storage_path: "{storage_root}/{datastream}/{year}/{month}/{day}/{data_folder}"
-  ancillary_storage_path: "{storage_root}/{datastream}/{year}/{month}/{day}/{ancillary_folder}"
+  data_storage_path: "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
+  ancillary_storage_path: "{storage_root}/{datastream}/{ancillary_folder}/year={year}/month={month}/day={day}"
 handler:
   classname: tsdat.io.handlers.NetCDFHandler

@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - Tide Gauge
-  # TODO: Change to "Summary" to meet standards
   description: "A Nile YSI Micropilot FMR51 was deployed on the Marine and Coastal Research Laboratory (MCRL) 
   pier at the Pacific Northwest National Laboratory (PNNL) campus in Sequim, Washington. The instrument 
   emits continuous, non-contact microwave transmission to measure distance to the water surface (meters), 

@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - PAR
-  # TODO: Change to "Summary" to meet standards
   description: "Two Li-COR Li-193 Spherical Underwater Quantum sensors were deployed on piles of the
   Marine and Coastal Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus 
   in Sequim, Washington. These instruments measure photosythetic photon flux density (PPFD, umol m-2 s-1), 

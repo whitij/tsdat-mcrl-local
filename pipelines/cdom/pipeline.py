@@ -30,7 +30,10 @@ class CDOM(IngestPipeline):
     def hook_finalize_dataset(self, dataset: xr.Dataset) -> xr.Dataset:
         # (Optional) Use this hook to modify the dataset after qc is applied
         # but before it gets saved to the storage area
-
+        
+        # Rename description to summary for CF compliance
+        dataset.attrs['summary'] = dataset.attrs.pop('description')
+        
         write_parquet(dataset, "cdom")
 
         return dataset

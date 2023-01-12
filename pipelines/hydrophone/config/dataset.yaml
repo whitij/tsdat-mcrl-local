@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - Hydrophone
-  # TODO: Change to "Summary" to meet standards
   description: "An Ocean Sonics icListen SC2-ETH-X2 hydrophone was installed on the Marine and 
   Coastal Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus 
   in Sequim, Washington. This instrument is located 2 ft above the seafloor with the sensor directed up, 

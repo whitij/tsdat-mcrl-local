@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - ADCP
-  # TODO: Change to "Summary" to meet standards
   description: "A Nortek 400kHz 2D Horizontal Profiler was installed on the Marine and Coastal 
   Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus 
   in Sequim, Washington. This instrument is located 5 meters above the seabed, facing true 

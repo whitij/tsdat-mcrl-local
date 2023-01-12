@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - CTD
-  # TODO: Change to "Summary" to meet standards
   description: "A Seabird SBE 37-SM MicroCAT CTD (conductivity temperature depth) sensor 
   was attached to a steel cage suspended into the water below a floating dock that is 
   attached to the Marine and Coastal Research Laboratory (MCRL) pier at the Pacific 

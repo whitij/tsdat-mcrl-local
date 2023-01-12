@@ -10,7 +10,6 @@ attrs:
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - Meteorology
-  # TODO: Change to "Summary" to meet standards
   description: "Several weather station instruments were set up on the Marine and Coastal Research 
   Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL) campus in Sequim, Washington. 
   This included a Campbell Scientific wind monitor, BaroVUE10 barometer, HygroVUE10 humidity sensor, 

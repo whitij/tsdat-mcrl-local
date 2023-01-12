@@ -10,12 +10,12 @@ from tsdat.config.utils import recursive_instantiate
 
 
 def write_parquet(dataset, instrument):
-    # TODO: Update storage root with S3 location
     parameters = {
         "storage_root": Path.cwd() / "storage" / instrument,
         "data_folder": "parquet",
         "data_storage_path": Path(
-            "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"        ),
+            "{storage_root}/{datastream}/{data_folder}/year={year}/month={month}/day={day}"
+        ),
     }
     storage_model = StorageConfig(
         classname="tsdat.io.storage.FileSystem", parameters=parameters

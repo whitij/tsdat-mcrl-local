@@ -1,7 +1,7 @@
 classname: pipelines.ph.pipeline.PH
 
 triggers:
-  - .*ph.*\.txt
+  - .*ph_.*\.txt
 
 retriever:
   path: pipelines/ph/config/retriever.yaml
@@ -11,5 +11,8 @@ dataset:
 
 quality:
   path: shared/quality.yaml
+
 storage:
-  path: pipelines/ph/config/storage.yaml
+  path: shared/storage.yaml
+  overrides:
+    /parameters/storage_root: storage/ph

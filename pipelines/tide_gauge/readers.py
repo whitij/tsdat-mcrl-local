@@ -2,6 +2,7 @@ from typing import Dict, Union
 from pydantic import BaseModel, Extra
 import xarray as xr
 import pandas as pd
+import numpy as np
 import csv
 from tsdat import DataReader
 
@@ -32,5 +33,7 @@ class TideGaugeReader(DataReader):
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
         df = pd.read_csv(input_key, sep=",| ", header=None, engine='python', names=('date','time','ms','flag','water_level'))
         df['time'] = df['date'] + ' ' + df['time'] + '.' + [str(x) for x in df['ms']]
+        # The flag was removed in later versions, so copy if needed
+        df['water_level'] = np.where(df['water_level'].isnull(), df['flag'], df['water_level'])
         df = df.drop(columns=['date','ms','flag'])
         return df.to_xarray()

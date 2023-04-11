@@ -71,6 +71,9 @@ class PipelineRegistry:
                         pipeline.__repr_name__(),
                         inputs,
                     )
+                    ## Manually move raw file
+                    for f in inputs:
+                        write_raw(f, config, pipeline.__repr_name__().lower())
                     try:
                         pipeline.run(inputs)
                         if clump:
@@ -84,10 +87,6 @@ class PipelineRegistry:
                         failures += 1
                     else:
                         successes += 1
-
-                    ## Manually move raw file
-                    for f in inputs:
-                        write_raw(f, config, pipeline.__repr_name__().lower())
 
         logger.info(
             "Processing completed with %s successes, %s failures, and %s skipped.",

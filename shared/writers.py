@@ -4,9 +4,9 @@ import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
-from tstring import Template
 
 from tsdat import FileWriter
+from tsdat.tstring import Template
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
 
@@ -84,7 +84,6 @@ class MCRLdataParquetWriter(FileWriter):
     def write(
         self, dataset: xr.Dataset, filepath: Optional[Path] = None, **kwargs: Any
     ) -> None:
-
         ds = dataset
         if len(ds.dims) > 1:
             if "iclisten" in ds.datastream:  # special handling for hydrophone

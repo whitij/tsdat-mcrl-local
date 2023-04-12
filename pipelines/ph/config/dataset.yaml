@@ -50,7 +50,7 @@ attrs:
   time_coverage_resolution: "5:00"
 
   # Don't delete these... they will be important for secondary pipelines
-  location_id: ph_ #TODO: currently requiring 3 characters
+  location_id: ph
   dataset_name: mcrl_pier
   qualifier: onset_mx2501_1
   temporal: 5min

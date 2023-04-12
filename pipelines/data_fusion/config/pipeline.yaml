@@ -1,0 +1,19 @@
+classname: pipelines.data_fusion.pipeline.DataFusion
+parameters:
+  datastreams:
+    - cdom.mcrl_pier-seabird_smp_1-5min.a1
+    #- ctd.mcrl_pier-seabird_smp_1-5min.a1
+    - tide_gauge.mcrl_pier-ysi_nile_1-5min.a1
+
+triggers: []
+
+retriever:
+  path: pipelines/data_fusion/config/retriever.yaml
+
+dataset:
+  path: pipelines/data_fusion/config/dataset.yaml
+
+quality:
+  path: shared/quality.yaml
+storage:
+  path: shared/storage.yaml

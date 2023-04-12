@@ -14,5 +14,3 @@ quality:
 
 storage:
   path: shared/storage.yaml
-  overrides:
-    /parameters/storage_root: storage/par

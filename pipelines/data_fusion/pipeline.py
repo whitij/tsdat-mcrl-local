@@ -32,8 +32,8 @@ class DataFusion(TransformationPipeline):
         plt.style.use("shared/styling.mplstyle")
 
         with self.storage.uploadable_dir(datastream) as tmp_dir:
-            fig, ax = plt.subplots(3)
-            dataset["water_level"].plot(ax=ax, x="time")  # type: ignore
+            fig, ax = plt.subplots()
+            ax.plot(dataset.time, dataset["water_level"])  # type: ignore
 
             # fig.suptitle(f"Example Variable at {location} on {date} {time}")
             plot_file = get_filename(dataset, title="example_plot", extension="png")

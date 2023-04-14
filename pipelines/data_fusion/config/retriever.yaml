@@ -3,17 +3,17 @@ parameters:
   transformation_parameters:
     # Where the point lies in the coordinate bounds (CENTER, LEFT, RIGHT)
     alignment:
-      time: LEFT
+      time: CENTER
 
     # How far to look for the next available data point
     ## In native units of seconds, or use int + numpy.timedelta64 units
     range:
-      time: 900
+      time: 300
 
     # Width of the transformation
     ## In native units of seconds
     width:
-      time: 600
+      time: 120
 
 coords:
   time:
@@ -29,23 +29,23 @@ data_vars:
     .*tide_gauge.*:
       name: water_level
       data_converters:
-        - classname: tsdat.transform.Interpolate
+        - classname: tsdat.transform.NearestNeighbor
 
-  temp:
-    .*ctd.*:
-      name: temp
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-  do:
-    .*ctd.*:
-      name: do
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-  salinity:
-    .*ctd.*:
-      name: salinity
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
+  # temp:
+  #   .*ctd.*:
+  #     name: temp
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
+  # do:
+  #   .*ctd.*:
+  #     name: do
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
+  # salinity:
+  #   .*ctd.*:
+  #     name: salinity
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
 
   cdom:
     .*cdom.*:

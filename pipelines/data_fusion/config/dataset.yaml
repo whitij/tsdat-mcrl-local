@@ -1,5 +1,3 @@
-# DEVELOPER: Add attrs and coords/variables to specify the output data structure
-
 attrs:
   title: data_fusion
   description: Pipeline to combine independent instrument datastreams

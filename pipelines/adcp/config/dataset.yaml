@@ -92,7 +92,7 @@ coords:
 
 data_vars:
   vel:
-    dims: [dir, range, time]
+    dims: [time, range, dir]
     dtype: float32
     attrs:
       long_name: Water Velocity
@@ -102,7 +102,7 @@ data_vars:
       fail_min: -5
       fail_max: 5
   U_mag:
-    dims: [range, time]
+    dims: [time, range]
     dtype: float32
     attrs:
       long_name: Water Speed
@@ -112,7 +112,7 @@ data_vars:
       fail_min: 0
       fail_max: 5
   U_dir:
-    dims: [range, time]
+    dims: [time, range]
     dtype: float32
     attrs:
       long_name: Water Direction
@@ -122,7 +122,7 @@ data_vars:
       fail_min: -180
       fail_max: 180
   amplitude:
-    dims: [beam, range, time]
+    dims: [time, range, beam]
     dtype: int
     attrs:
       long_name: Acoustic Signal Amplitude

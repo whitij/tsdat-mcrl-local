@@ -104,12 +104,12 @@ def vap(
 
 if __name__ == "__main__":
     app(
-        vap(
-            Path("pipelines/data_fusion/config/pipeline.yaml"),
-            "20230301.000000",
-            "20230302.000000",
-        )
+        # vap(
+        #     Path("pipelines/data_fusion/config/pipeline.yaml"),
+        #     "20230401.000000",
+        #     "20230402.000000",
+        # )
     )
 
 # python runner.py ingest storage/test_data/tide_gauge/2023/03/01/*.log
-# python runner.py vap pipelines/data_fusion/config/pipeline.yaml --start 20230301.000000 --end 20230302.000000
+# python runner.py vap pipelines/data_fusion/config/pipeline.yaml --start 20230401.000000 --end 20230402.000000

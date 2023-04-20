@@ -1,9 +1,14 @@
 classname: pipelines.data_fusion.pipeline.DataFusion
 parameters:
   datastreams:
-    - cdom.mcrl_pier-seabird_smp_1-5min.a1
-    #- ctd.mcrl_pier-seabird_smp_1-5min.a1
     - tide_gauge.mcrl_pier-ysi_nile_1-5min.a1
+    - ctd.mcrl_pier-seabird_smp_1-5min.a1
+    - ph.mcrl_pier-onset_mx2501_1-5min.a1
+    - par.mcrl_pier-licor_li193_1-15min.a1
+    - cdom.mcrl_pier-seabird_smp_1-5min.a1
+    - adcp.mcrl_pier-nortek_awac_1-15min.a1
+    - hydrophone.mcrl_pier-oceansonics_iclisten_1-15min.a1
+    - met.mcrl_pier-campbell_cr1000_1-5min.a1
 
 triggers: []
 

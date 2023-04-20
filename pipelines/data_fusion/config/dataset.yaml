@@ -19,6 +19,21 @@ coords:
       cf_role: timeseries_id
       coverage_content_type: coordinate
       timezone: UTC
+  range:
+    dims: [range]
+    dtype: float32
+    attrs:
+      long_name: Range
+      units: m
+      coverage_content_type: coordinate
+  frequency:
+    dims: [frequency]
+    dtype: int
+    attrs:
+      long_name: Frequency (Hz)
+      standard_name: sound_frequency
+      units: s-1
+      coverage_content_type: coordinate
 
 data_vars:
   water_level:
@@ -33,6 +48,27 @@ data_vars:
       vertical_datum: NAVD88
       fail_min: -2
       fail_max: 5
+
+  U_mag:
+    dims: [time, range]
+    dtype: float32
+    attrs:
+      long_name: Water Speed
+      standard_name: sea_water_speed
+      units: m s-1
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 5
+  U_dir:
+    dims: [time, range]
+    dtype: float32
+    attrs:
+      long_name: Water Direction
+      standard_name: sea_water_to_direction
+      units: degree
+      coverage_content_type: physicalMeasurement
+      fail_min: -180
+      fail_max: 180
 
   temp:
     dims: [time]
@@ -120,3 +156,28 @@ data_vars:
         cyanobacteria; their presence is essential for photosynthesis to take place.
       fail_min: 0
       fail_max: 100
+
+  spectra:
+    dims: [time, frequency]
+    dtype: float
+    attrs:
+      long_name: Sound Frequency Spectra (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
+        every 15 minutes.
+      fail_min: 50
+      fail_max: 150
+  SPL:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Sound Pressure Level (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: "" #TODO
+      fail_min: 50
+      fail_max: 150

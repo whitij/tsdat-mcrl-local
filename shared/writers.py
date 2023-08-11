@@ -12,6 +12,16 @@ from tsdat.config.utils import recursive_instantiate
 
 
 def create_storage_class(instrument, data_folder):
+    """----------------------------------------------------------------------------
+    Creates generic Tsdat storage class
+
+    Args:
+        instrument (str): Instrument handle, for use in data filepath
+        data_folder (str): Data folder, typically file format, for use in datafilepath
+
+    Returns:
+        tsdat.StorageConfig: Storage model configuration
+    ----------------------------------------------------------------------------"""
     parameters = {
         "storage_root": Path.cwd() / "storage" / instrument,
         "data_folder": data_folder,
@@ -26,6 +36,16 @@ def create_storage_class(instrument, data_folder):
 
 
 def write_raw(input_key, config, instrument):
+    """----------------------------------------------------------------------------
+    Moves the raw file from the read location to the final storage location. Called
+    from the tsdat dispatcher in registry.py
+
+    Args:
+        input_key (str): Raw file location
+        config (tsdat.PipelineConfig): Pipeline configuration
+        instrument (str): Instrument handle, for use in data filepath
+
+    ----------------------------------------------------------------------------"""
     storage_model = create_storage_class(instrument, "raw")
     storage = recursive_instantiate(storage_model)
 
@@ -56,6 +76,14 @@ def write_raw(input_key, config, instrument):
 
 
 def write_parquet(dataset, instrument):
+    """----------------------------------------------------------------------------
+    Saves pipeline data in a parquet format using a custom writer
+
+    Args:
+        dataset (xarray.dataset): Pipeline dataset
+        instrument (str): Instrument handle, for use in data filepath
+
+    ----------------------------------------------------------------------------"""
     storage_model = create_storage_class(instrument, "parquet")
     storage = recursive_instantiate(storage_model)
     storage.handler.writer = MCRLdataParquetWriter()

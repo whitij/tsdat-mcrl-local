@@ -4,11 +4,12 @@ import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
-from tstring import Template
 
 from tsdat import FileWriter
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
+from tsdat.tstring import Template
+
 
 
 def create_storage_class(instrument, data_folder):

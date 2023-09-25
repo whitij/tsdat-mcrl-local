@@ -9,6 +9,8 @@ from tsdat import FileWriter
 from tsdat.tstring import Template
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
+from tsdat.tstring import Template
+
 
 
 def create_storage_class(instrument, data_folder):

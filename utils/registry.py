@@ -21,7 +21,9 @@ class PipelineRegistry:
         self._cache: Dict[Path, List[Pattern[str]]] = {}
         self._load()
 
-    def dispatch(self, input_keys: List[str], clump: bool = False, multidispatch: bool = False):
+    def dispatch(
+        self, input_keys: List[str], clump: bool = False, multidispatch: bool = False
+    ):
         """-----------------------------------------------------------------------------
         Instantiates and runs the appropriate Pipeline for the provided input files.
         according to the ingest's `mapping` specifications.
@@ -50,10 +52,10 @@ class PipelineRegistry:
 
             if not multidispatch and len(config_files) > 1:
                 raise RuntimeError(
-                        f"More than one match for input key '{input_key}'. Please"
-                        " update the pipeline triggers to remove duplicate matches."
-                        f" Found matches: {config_files}"
-                    )
+                    f"More than one match for input key '{input_key}'. Please"
+                    " update the pipeline triggers to remove duplicate matches."
+                    f" Found matches: {config_files}"
+                )
             elif not len(config_files):
                 logger.warning(
                     "No pipeline configuration found matching input key '%s'", input_key
@@ -84,7 +86,7 @@ class PipelineRegistry:
                             inputs,
                         )
                         failures += 1
-        
+
         logger.info(
             "Processing completed with %s successes, %s failures, and %s skipped.",
             successes,
@@ -132,4 +134,4 @@ class PipelineRegistry:
                 if regex.match(input_key):
                     matches.append(path)
                     break
-        return matches     
+        return matches

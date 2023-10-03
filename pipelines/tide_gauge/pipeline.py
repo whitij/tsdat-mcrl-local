@@ -38,11 +38,11 @@ class Tide_Gauge(IngestPipeline):
         # Example of how to change calibration date
         # if dataset[time][0] < datetime(2022,1,1)
         #  dataset.attrs[calibration_date] = '2017/01/01'
-        
+
         # Rename description to summary for CF compliance
-        dataset.attrs['summary'] = dataset.attrs.pop('description')
-        
-        write_parquet(dataset, "tide_gauge")
+        dataset.attrs["summary"] = dataset.attrs.pop("description")
+
+        write_parquet(dataset)
 
         return dataset
 

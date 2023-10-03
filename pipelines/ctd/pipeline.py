@@ -32,7 +32,7 @@ class CTD(IngestPipeline):
         # (Optional) Use this hook to modify the dataset after qc is applied
         # but before it gets saved to the storage area
 
-        write_parquet(dataset, "ctd")
+        write_parquet(dataset)
 
         return dataset
 

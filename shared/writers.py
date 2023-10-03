@@ -12,24 +12,21 @@ from tsdat.config.utils import recursive_instantiate
 from tsdat.tstring import Template
 
 
-
-def create_storage_class(instrument, data_folder):
+def create_storage_class(data_folder):
     """----------------------------------------------------------------------------
     Creates generic Tsdat storage class
 
     Args:
-        instrument (str): Instrument handle, for use in data filepath
-        data_folder (str): Data folder, typically file format, for use in datafilepath
+        data_folder (str): Data folder, typically file format, for use in data
+        filepath
 
     Returns:
         tsdat.StorageConfig: Storage model configuration
     ----------------------------------------------------------------------------"""
     parameters = {
-        "storage_root": Path.cwd() / "storage" / instrument,
-        "data_folder": data_folder,
-        "data_storage_path": Path(
-            "{storage_root}/{datastream}/{data_folder}/{year}/{month}/{day}"
-        ),
+        "data_storage_path": Path("{location_id}/{datastream}")
+        / Path(f"{data_folder}")
+        / Path("{year}/{month}/{day}"),
     }
     storage_model = StorageConfig(
         classname="tsdat.io.storage.FileSystem", parameters=parameters
@@ -37,7 +34,7 @@ def create_storage_class(instrument, data_folder):
     return storage_model
 
 
-def write_raw(input_key, config, instrument):
+def write_raw(input_key, config):
     """----------------------------------------------------------------------------
     Moves the raw file from the read location to the final storage location. Called
     from the tsdat dispatcher in registry.py
@@ -45,10 +42,9 @@ def write_raw(input_key, config, instrument):
     Args:
         input_key (str): Raw file location
         config (tsdat.PipelineConfig): Pipeline configuration
-        instrument (str): Instrument handle, for use in data filepath
 
     ----------------------------------------------------------------------------"""
-    storage_model = create_storage_class(instrument, "raw")
+    storage_model = create_storage_class("raw")
     storage = recursive_instantiate(storage_model)
 
     # Can get datastream from pipeline config
@@ -64,6 +60,7 @@ def write_raw(input_key, config, instrument):
     datastream_dir = Path(
         data_stub_path.substitute(
             dict(
+                location_id=config.dataset.attrs.location_id,
                 datastream=config.dataset.attrs.datastream,
                 year=year,
                 month=month,
@@ -77,16 +74,15 @@ def write_raw(input_key, config, instrument):
     # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
 
 
-def write_parquet(dataset, instrument):
+def write_parquet(dataset):
     """----------------------------------------------------------------------------
     Saves pipeline data in a parquet format using a custom writer
 
     Args:
         dataset (xarray.dataset): Pipeline dataset
-        instrument (str): Instrument handle, for use in data filepath
 
     ----------------------------------------------------------------------------"""
-    storage_model = create_storage_class(instrument, "parquet")
+    storage_model = create_storage_class("parquet")
     storage = recursive_instantiate(storage_model)
     storage.handler.writer = MCRLdataParquetWriter()
     storage.save_data(dataset)

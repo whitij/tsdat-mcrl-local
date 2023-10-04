@@ -68,7 +68,7 @@ def write_raw(input_key, config):
             ),
         )
     )
-    filepath = datastream_dir / filename
+    filepath = Path("storage/root") / datastream_dir / filename
     filepath.parent.mkdir(exist_ok=True, parents=True)
     shutil.copy(input_key, filepath)  # save file by moving it from source
     # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl

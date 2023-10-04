@@ -73,7 +73,7 @@ class PipelineRegistry:
                     )
                     ## Manually move raw file
                     for f in inputs:
-                        write_raw(f, config, pipeline.__repr_name__().lower())
+                        write_raw(f, config)
                     try:
                         pipeline.run(inputs)
                         successes += 1

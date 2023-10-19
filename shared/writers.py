@@ -1,9 +1,11 @@
 import shutil
+import numpy as np
 import pandas as pd
 import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
+from mhkit.dolfyn.time import dt642epoch
 
 from tsdat import FileWriter
 from tsdat.tstring import Template
@@ -105,7 +107,7 @@ class MCRLdataParquetWriter(FileWriter):
         to_parquet_kwargs.update(dict(engine="pyarrow", use_dictionary=False))
 
     parameters: Parameters = Parameters()
-    file_extension: str = ".parquet"
+    file_extension: str = "parquet"
 
     def write(
         self, dataset: xr.Dataset, filepath: Optional[Path] = None, **kwargs: Any
@@ -145,5 +147,7 @@ class MCRLdataParquetWriter(FileWriter):
             if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
 
-        # print(df)
+        # Manually convert time to int with milliseconds for aws athena
+        df.time = (dt642epoch(df.time.values) * 1000).astype(np.int64)
+
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)

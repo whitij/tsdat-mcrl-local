@@ -1,7 +1,7 @@
 classname: pipelines.pco2.pipeline.PCO2
 
 triggers:
-  - .*pco2.*\.log
+  - .*pco2.*raw.*\.nc
 
 retriever:
   path: pipelines/pco2/config/retriever.yaml
@@ -14,5 +14,3 @@ quality:
 
 storage:
   path: shared/storage.yaml
-  overrides:
-    /parameters/storage_root: storage/pco2

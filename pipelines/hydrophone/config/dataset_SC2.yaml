@@ -63,7 +63,7 @@ coords:
     attrs:
       long_name: Time (UTC)
       standard_name: time
-      units: seconds since 1970-01-01 00:00:00
+      units: seconds since 1970-01-01 00:00:00 UTC
       cf_role: timeseries_id
       coverage_content_type: coordinate
       timezone: UTC
@@ -89,8 +89,8 @@ data_vars:
       description: >-
         Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
         every 15 minutes.
-      fail_min: 50
-      fail_max: 150
+      valid_min: 50
+      valid_max: 150
 
   SPL:
     dims: [time]

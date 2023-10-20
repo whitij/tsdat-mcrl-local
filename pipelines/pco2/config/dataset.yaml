@@ -1,7 +1,7 @@
 attrs:
   conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
   featureType: timeseries
-  id: MCRLdata_met
+  id: MCRLdata_pco2
   infoURL: https://www.osti.gov/biblio/1842840
   license: Freely Distributed
   naming_authority: gov.pnnl.sequim
@@ -27,8 +27,8 @@ attrs:
   publisher_url: https://www.pnnl.gov/
 
   # Platform and Instrument
-  platform: pier
-  platform_name: mcrl_pier
+  platform: dock
+  platform_name: mcrl_dock
   platform_vocabulary: https://mmisw.org/ont/ioos/platform
   instrument: In Situ/Laboratory Instruments > Chemical Meters/Analyzers > CO2 Analyzers
   instrument_vocabulary: GCMD Instrument Keywords #https://gcmd.earthdata.nasa.gov/KeywordViewer/
@@ -38,58 +38,117 @@ attrs:
   geospatial_bounds: POINT(48.07930, -123.04508)
   geospatial_bounds_crs: "EPSG:4326"
   time_coverage_start: "2023-08-15"
-  time_coverage_resolution: "15:00"
+  time_coverage_resolution: "3:00:00"
 
   location_id: pco2
   dataset_name: mcrl_pier
-  qualifier: campbell_cr1000_1
+  qualifier: battelle_seaology_1
   temporal: 3hr
   data_level: a1
 
 coords:
+  time:
+    dims: [time]
+    dtype: datetime64[ms]
+    attrs:
+      units: seconds since 1970-01-01 00:00:00 UTC
+      standard_name: time
+      long_name: Time
+      timezone: UTC
+
   position:
     dims: [position]
     dtype: str
     attrs:
       units: "1"
-      long_name: Sensor sample type
+      long_name: Sensor Cycle
       description:
-        Air and "Equilibrium" (air samples taken after equilibrating with ambient water)
-        samples with circulation pump on and off
-  time:
-    dims: [time]
-    dtype: datetime64[s]
+        This sensor takes 4 measurement samples. Two air samples and two "equilibrium"
+        samples (air samples taken by bubbling air through seawater until the gas
+        exchange reaches equilibrium) are taken, each with the air circulation pump on
+        or off.
+
+  sample:
+    dims: [sample]
+    dtype: int8
     attrs:
-      units: Seconds since 1970-01-01 00:00:00 UTC
-      standard_name: time
-      long_name: Time
-      time_zone: UTC
+      units: "1"
+      standard_name: number_of_observations
+      long_name: Sample Number
 
 data_vars:
-  pCO2:
-    dims: [time, position]
+  pco2_air:
+    dims: [time]
     dtype: float32
     attrs:
-      long_name: CO2 partial pressure
-      standard_name: partial_pressure_of_carbon_dioxide_in_sea_water
+      long_name: Partial Pressure of Carbon Dioxide in Air
+      standard_name: partial_pressure_of_carbon_dioxide_in_air
+      comment: Mean of the `pco2_raw` 'Air_cycle_pump_off' samples
       units: ppm
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 10000
 
-  O2:
-    dims: [time, position]
+  o2_air:
+    dims: [time]
     dtype: float32
     attrs:
-      long_name: 02 partial pressure
-      standard_name: volume_fraction_of_oxygen_in_sea_water
+      long_name: Percent Oxygen in Air
+      standard_name: volume_fraction_of_oxygen_in_air
+      comment: Mean of the `o2_raw` 'Air_cycle_pump_off' samples
       units: percent
       coverage_content_type: physicalMeasurement
       fail_min: 0
       fail_max: 100
 
+  pco2_water:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Partial Pressure of Carbon Dioxide in Seawater
+      standard_name: partial_pressure_of_carbon_dioxide_in_sea_water
+      comment: Mean of the `pco2_raw` 'Equil_cycle_pump_off' samples
+      units: ppm
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 10000
+
+  o2_water:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Percent Oxygen in Seawater
+      standard_name: volume_fraction_of_oxygen_in_sea_water
+      comment: Mean of the `o2_raw` 'Equil_cycle_pump_off' samples
+      units: percent
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 100
+
+  pco2_raw:
+    dims: [time, position, samples]
+    dtype: float32
+    attrs:
+      long_name: Partial Pressure of Carbon Dioxide
+      units: ppm
+      ancillary_variables: pco2_air pco2_water
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 10000
+
+  o2_raw:
+    dims: [time, position, samples]
+    dtype: float32
+    attrs:
+      long_name: Percent Oxygen
+      units: percent
+      ancillary_variables: o2_air o2_water
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 100
+
   pressure:
-    dims: [time, position]
+    dims: [time, position, sample]
     dtype: float32
     attrs:
       long_name: Air Pressure
@@ -98,33 +157,62 @@ data_vars:
       coverage_content_type: physicalMeasurement
 
   rh:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Relative Humidity (%)
       standard_name: relative_humidity
       units: percent
       coverage_content_type: physicalMeasurement
-      fail_min: 0
-      fail_max: 100
+      valid_min: 0
+      valid_max: 100
 
   temp_rh:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Temperature of relative humidity sensor
-      units: degC
+      standard_name: sea_water_temperature
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      valid_min: 0
+      valid_max: 30
 
   temp_licor:
-    dims: [time, position]
-    dtype: float
+    dims: [time, position, sample]
+    dtype: float32
     attrs:
       long_name: Temperature of Licor 850 sensor
-      units: degC
+      standard_name: sea_water_temperature
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      valid_min: 0
+      valid_max: 30
+
+  zero_coeff:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Zero Coefficient
+      units: "1"
+
+  span_coeff:
+    dims: [time]
+    dtype: float32
+    attrs:
+      long_name: Span Coefficient
+      units: "1"
+
+  minute:
+    dims: [time, position]
+    dtype: int8
+    attrs:
+      long_name: Minute on the hour that a position cycle is run
+      units: min
 
   flag:
-    dims: [time, position]
-    dtype: int
+    dims: [time]
+    dtype: int8
     attrs:
       long_name: Quality Flag
       standard_name: quality_flag

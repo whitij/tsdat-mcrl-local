@@ -1,8 +1,11 @@
 classname: tsdat.io.storage.FileSystem
 parameters:
-  storage_root: storage
-  data_folder: netcdf
-  data_storage_path: "{storage_root}/{datastream}/{data_folder}/{year}/{month}/{day}"
-  ancillary_storage_path: "{storage_root}/{datastream}/{ancillary_folder}/{year}/{month}/{day}"
+  data_storage_path: "{location_id}/{datastream}/netcdf/{year}/{month}/{day}"
+  ancillary_storage_path: "{location_id}/{datastream}/ancillary/{year}/{month}/{day}"
+
 handler:
   classname: tsdat.io.handlers.NetCDFHandler
+  parameters:
+    writer:
+      to_netcdf_kwargs:
+        unlimited_dims: time

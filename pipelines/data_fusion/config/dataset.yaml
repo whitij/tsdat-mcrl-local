@@ -1,0 +1,183 @@
+attrs:
+  title: data_fusion
+  description: Pipeline to combine independent instrument datastreams
+  location_id: mcrl
+  dataset_name: data_fusion
+  data_level: b1
+  # qualifier:
+  # temporal:
+  # institution:
+
+coords:
+  time:
+    dims: [time]
+    dtype: datetime64[ms]
+    attrs:
+      long_name: Time (UTC)
+      standard_name: time
+      units: seconds since 1970-01-01 00:00:00 UTC
+      cf_role: timeseries_id
+      coverage_content_type: coordinate
+      timezone: UTC
+  range:
+    dims: [range]
+    dtype: float32
+    attrs:
+      long_name: Range
+      units: m
+      coverage_content_type: coordinate
+  frequency:
+    dims: [frequency]
+    dtype: int
+    attrs:
+      long_name: Frequency (Hz)
+      standard_name: sound_frequency
+      units: s-1
+      coverage_content_type: coordinate
+
+data_vars:
+  water_level:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Water Level (m)
+      standard_name: sea_surface_height_above_geopotential_datum
+      units: m
+      coverage_content_type: physicalMeasurement
+      description: Water surface level relative to NAVD88
+      vertical_datum: NAVD88
+      fail_min: -2
+      fail_max: 5
+
+  U_mag:
+    dims: [time, range]
+    dtype: float32
+    attrs:
+      long_name: Water Speed
+      standard_name: sea_water_speed
+      units: m s-1
+      coverage_content_type: physicalMeasurement
+      fail_min: 0
+      fail_max: 5
+  U_dir:
+    dims: [time, range]
+    dtype: float32
+    attrs:
+      long_name: Water Direction
+      standard_name: sea_water_to_direction
+      units: degree
+      coverage_content_type: physicalMeasurement
+      fail_min: -180
+      fail_max: 180
+
+  temp:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Water Temperature (degC)
+      standard_name: sea_water_temperature
+      units: degree_C
+      coverage_content_type: physicalMeasurement
+      description: "Ambient water temperature in the vicinity of the device"
+      fail_min: -20
+      fail_max: 40
+
+  do:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Dissolved Oxygen (mg/L)
+      standard_name: mass_concentration_of_oxygen_in_sea_water
+      units: mg L-1
+      coverage_content_type: physicalMeasurement
+      description: "Dissolved oxygen in the water"
+      fail_min: 0
+      fail_max: 20
+
+  salinity:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Salinity (psu)
+      standard_name: sea_water_practical_salinity
+      units: psu
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Practical Salinity is a determination of the salinity of sea water, based on its
+        electrical conductance. The measured conductance, corrected for temperature and
+        pressure, is compared to the conductance of a standard potassium chloride
+        solution, producing a value on the Practical Salinity Scale of 1978.
+      fail_min: 25
+      fail_max: 35
+
+  cdom:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Colored Dissolved Organic Matter - CDOM (ppb)
+      standard_name: concentration_of_colored_dissolved_organic_matter_in_sea_water_expressed_as_equivalent_mass_fraction_of_quinine_sulfate_dihydrate
+      units: "1"
+      description: >-
+        CDOM - colored dissolved organic matter occurs naturally in aquatic environments
+        primarily as a result of tannins released from decaying plant and animal matter,
+        which can enter coastal areas in river run-off containing organic materials
+        leached from soils. When present in high concentrations, it imparts a brown or
+        yellowish color to water. Its presence can negatively impact fish populations by
+        reducing dissolved oxygen concentrations to harmful levels and by releasing
+        nutrients and metals that contaminate the water.
+      fail_min: 0
+      fail_max: 150
+
+  phycoerythrin:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Phycoerythrin (ppb)
+      standard_name: phycoerythrin
+      units: "1"
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Phycoerythrin is a red protein-pigment complex from the light-harvesting
+        phycobiliprotein family, present in red algae and cryptophytes, accessory to the
+        main chlorophyll pigments responsible for photosynthesis.
+      fail_min: 0
+      fail_max: 100
+
+  chlorophyll:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: chlorophyll (ug/L)
+      standard_name: mass_concentration_of_chlorophyll_in_sea_water
+      units: ug L-1
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Chlorophylls are the green pigments found in most plants, algae and
+        cyanobacteria; their presence is essential for photosynthesis to take place.
+      fail_min: 0
+      fail_max: 100
+
+  spectra:
+    dims: [time, frequency]
+    dtype: float
+    attrs:
+      long_name: Sound Frequency Spectra (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: >-
+        Frequency spectra at bands between 10 Hz-204 kHz. One 5-minute averaged reading
+        every 15 minutes.
+      fail_min: 50
+      fail_max: 150
+  SPL:
+    dims: [time]
+    dtype: float
+    attrs:
+      long_name: Sound Pressure Level (dB)
+      standard_name: sound_pressure_level_in_water
+      units: dB re 1uPa
+      coverage_content_type: physicalMeasurement
+      description: "" #TODO
+      fail_min: 50
+      fail_max: 150

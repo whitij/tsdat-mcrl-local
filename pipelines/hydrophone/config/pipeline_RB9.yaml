@@ -1,0 +1,16 @@
+classname: pipelines.hydrophone.pipeline.Hydrophone
+
+triggers:
+  - .*RBF.*\.txt
+
+retriever:
+  path: pipelines/hydrophone/config/retriever.yaml
+
+dataset:
+  path: pipelines/hydrophone/config/dataset_RB9.yaml
+
+quality:
+  path: shared/quality.yaml
+
+storage:
+  path: shared/storage.yaml

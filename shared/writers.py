@@ -1,24 +1,34 @@
 import shutil
+import numpy as np
 import pandas as pd
 import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
+from mhkit.dolfyn.time import dt642epoch
 
 from tsdat import FileWriter
+from tsdat.tstring import Template
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
 from tsdat.tstring import Template
 
 
+def create_storage_class(data_folder):
+    """----------------------------------------------------------------------------
+    Creates generic Tsdat storage class
 
-def create_storage_class(instrument, data_folder):
+    Args:
+        data_folder (str): Data folder, typically file format, for use in data
+        filepath
+
+    Returns:
+        tsdat.StorageConfig: Storage model configuration
+    ----------------------------------------------------------------------------"""
     parameters = {
-        "storage_root": Path.cwd() / "storage" / instrument,
-        "data_folder": data_folder,
-        "data_storage_path": Path(
-            "{storage_root}/{datastream}/{data_folder}/{year}/{month}/{day}"
-        ),
+        "data_storage_path": Path("{location_id}/{datastream}")
+        / Path(f"{data_folder}")
+        / Path("{year}/{month}/{day}"),
     }
     storage_model = StorageConfig(
         classname="tsdat.io.storage.FileSystem", parameters=parameters
@@ -26,8 +36,17 @@ def create_storage_class(instrument, data_folder):
     return storage_model
 
 
-def write_raw(input_key, config, instrument):
-    storage_model = create_storage_class(instrument, "raw")
+def write_raw(input_key, config):
+    """----------------------------------------------------------------------------
+    Moves the raw file from the read location to the final storage location. Called
+    from the tsdat dispatcher in registry.py
+
+    Args:
+        input_key (str): Raw file location
+        config (tsdat.PipelineConfig): Pipeline configuration
+
+    ----------------------------------------------------------------------------"""
+    storage_model = create_storage_class("raw")
     storage = recursive_instantiate(storage_model)
 
     # Can get datastream from pipeline config
@@ -43,6 +62,7 @@ def write_raw(input_key, config, instrument):
     datastream_dir = Path(
         data_stub_path.substitute(
             dict(
+                location_id=config.dataset.attrs.location_id,
                 datastream=config.dataset.attrs.datastream,
                 year=year,
                 month=month,
@@ -50,14 +70,21 @@ def write_raw(input_key, config, instrument):
             ),
         )
     )
-    filepath = datastream_dir / filename
+    filepath = Path("storage/root") / datastream_dir / filename
     filepath.parent.mkdir(exist_ok=True, parents=True)
     shutil.copy(input_key, filepath)  # save file by moving it from source
     # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
 
 
-def write_parquet(dataset, instrument):
-    storage_model = create_storage_class(instrument, "parquet")
+def write_parquet(dataset):
+    """----------------------------------------------------------------------------
+    Saves pipeline data in a parquet format using a custom writer
+
+    Args:
+        dataset (xarray.dataset): Pipeline dataset
+
+    ----------------------------------------------------------------------------"""
+    storage_model = create_storage_class("parquet")
     storage = recursive_instantiate(storage_model)
     storage.handler.writer = MCRLdataParquetWriter()
     storage.save_data(dataset)
@@ -80,12 +107,11 @@ class MCRLdataParquetWriter(FileWriter):
         to_parquet_kwargs.update(dict(engine="pyarrow", use_dictionary=False))
 
     parameters: Parameters = Parameters()
-    file_extension: str = ".parquet"
+    file_extension: str = "parquet"
 
     def write(
         self, dataset: xr.Dataset, filepath: Optional[Path] = None, **kwargs: Any
     ) -> None:
-
         ds = dataset
         if len(ds.dims) > 1:
             if "iclisten" in ds.datastream:  # special handling for hydrophone
@@ -103,11 +129,16 @@ class MCRLdataParquetWriter(FileWriter):
                 df = pd.DataFrame(
                     {"time": ds["time"], "maxU": maxU, "maxU_qc": qc_list}
                 )
+            elif "pco2" in ds.datastream:  # special handling for pCO2 sensor
+                pco2 = ds["pco2_water"].values
+                pco2_qc = ds["qc_pco2_water"].values
+                df = pd.DataFrame(
+                    {"time": ds["time"], "pco2": pco2, "pco2_qc": pco2_qc}
+                )
             else:
                 raise Warning(
                     "Dataset has more than one dimension and no exception for parquet."
                 )
-                return
         else:
             df = ds.to_dataframe(self.parameters.dim_order)  # type: ignore
 
@@ -115,6 +146,12 @@ class MCRLdataParquetWriter(FileWriter):
         for col in df.columns:
             if "qc" in col:
                 df[col] = pd.to_numeric(df[col])
+            if "time" in col:
+                df[col] = (dt642epoch(df[col].values) * 1000).astype(np.int64)
 
-        # print(df)
+        # Manually convert time to int with milliseconds for aws athena
+        if not hasattr(df, "time"):
+            df["time"] = (dt642epoch(df.index.values) * 1000).astype(np.int64)
+            df = df.set_index("time")
+
         df.to_parquet(filepath, **self.parameters.to_parquet_kwargs)

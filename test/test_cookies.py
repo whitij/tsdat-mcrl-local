@@ -1,5 +1,4 @@
 import pytest
-
 import shutil
 from typer.testing import CliRunner
 from pathlib import Path
@@ -10,7 +9,6 @@ runner = CliRunner()
 
 
 def test_generate_ingest_pipeline():
-
     output_dir = Path("pipelines") / "ingest_testing"
     if output_dir.exists():
         shutil.rmtree(output_dir)
@@ -25,6 +23,8 @@ def test_generate_ingest_pipeline():
             "PNNL",
             "--ingest-description",
             "Testing typer wrapper over cookiecutter ingest pipeline template.",
+            "--data-standards",
+            "basic",
             "--no-use-custom-data-reader",
             "--no-use-custom-data-converter",
             "--no-use-custom-qc",

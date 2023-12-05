@@ -130,10 +130,26 @@ class MCRLdataParquetWriter(FileWriter):
                     {"time": ds["time"], "maxU": maxU, "maxU_qc": qc_list}
                 )
             elif "pco2" in ds.datastream:  # special handling for pCO2 sensor
-                pco2 = ds["pco2_water"].values
-                pco2_qc = ds["qc_pco2_water"].values
+                pco2_water = ds["pco2_water"].values
+                qc_pco2_water = ds["qc_pco2_water"].values
+                pco2_air = ds["pco2_air"].values
+                qc_pco2_air = ds["qc_pco2_air"].values
+                o2_water = ds["o2_water"].values
+                qc_o2_water = ds["qc_o2_water"].values
+                o2_air = ds["o2_air"].values
+                qc_o2_air = ds["qc_o2_air"].values
                 df = pd.DataFrame(
-                    {"time": ds["time"], "pco2": pco2, "pco2_qc": pco2_qc}
+                    {
+                        "time": ds["time"],
+                        "pco2_water": pco2_water,
+                        "qc_pco2_water": qc_pco2_water,
+                        "pco2_air": pco2_air,
+                        "qc_pco2_air": qc_pco2_air,
+                        "o2_water": o2_water,
+                        "qc_o2_water": qc_o2_water,
+                        "o2_air": o2_air,
+                        "qc_o2_air": qc_o2_air,
+                    }
                 )
             else:
                 raise Warning(

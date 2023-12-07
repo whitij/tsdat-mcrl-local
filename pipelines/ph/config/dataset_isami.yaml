@@ -91,8 +91,8 @@ data_vars:
       coverage_content_type: physicalMeasurement
       description: Measure of acidity of seawater
       auxillary_variables: salinity
-      fail_min: 0
-      fail_max: 14
+      fail_min: 7
+      fail_max: 9
 
   salinity:
     dims: [time]

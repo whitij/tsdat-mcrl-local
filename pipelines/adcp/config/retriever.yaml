@@ -8,7 +8,7 @@ coords:
     name: time
     data_converters:
       - classname: tsdat.io.converters.StringToDatetime
-        format: "%Y-%m-%d %H:%M:%S"
+        format: "%Y-%m-%d %H:%M:%S.%f"
         timezone: UTC
   range:
     name: range

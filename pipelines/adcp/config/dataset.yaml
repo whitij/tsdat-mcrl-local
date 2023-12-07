@@ -2,15 +2,15 @@ attrs:
   # https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html
   # https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
   # Dataset Description
-  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  Conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
   featureType: timeseries
   id: MCRLdata_adcp
-  infoURL: https://www.osti.gov/biblio/1842840
+  infoUrl: https://www.osti.gov/biblio/1842840
   license: Freely Distributed
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - ADCP
-  description: >-
+  summary: >-
     A Nortek 400kHz 2D Horizontal Profiler was installed on the Marine and Coastal
     Research Laboratory (MCRL) pier at the Pacific Northwest National Laboratory (PNNL)
     campus in Sequim, Washington. This instrument is located 5 meters above the seabed,
@@ -55,6 +55,7 @@ attrs:
   data_level: a1
   qualifier: nortek_awac_1
   temporal: 15min
+  description: see summary
 
 coords:
   time:

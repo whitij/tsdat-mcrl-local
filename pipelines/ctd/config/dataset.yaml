@@ -2,15 +2,15 @@ attrs:
   # https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html
   # https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
   # Dataset Description
-  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  Conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
   featureType: timeseries
   id: MCRLdata_ctd
-  infoURL: https://www.osti.gov/biblio/1842840
+  infoUrl: https://www.osti.gov/biblio/1842840
   license: Freely Distributed
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - CTD
-  description: >-
+  summary: >-
     A Seabird SBE 37-SM MicroCAT CTD (conductivity temperature depth) sensor was
     attached to a steel cage suspended into the water below a floating dock that is
     attached to the Marine and Coastal Research Laboratory (MCRL) pier at the Pacific
@@ -56,6 +56,7 @@ attrs:
   qualifier: seabird_smp_1
   temporal: 5min
   data_level: a1
+  description: see summary
 
 coords:
   time:
@@ -72,7 +73,7 @@ coords:
 data_vars:
   temp:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Water Temperature (degC)
       standard_name: sea_water_temperature
@@ -84,7 +85,7 @@ data_vars:
 
   do:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Dissolved Oxygen (mg/L)
       standard_name: mass_concentration_of_oxygen_in_sea_water
@@ -96,7 +97,7 @@ data_vars:
 
   salinity:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Salinity (psu)
       standard_name: sea_water_practical_salinity

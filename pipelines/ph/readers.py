@@ -1,12 +1,10 @@
 from typing import Dict, Union
-from pydantic import BaseModel, Extra
 import xarray as xr
 import pandas as pd
-import csv
 from tsdat import DataReader
 
 
-class PHReader(DataReader):
+class OnsetReader(DataReader):
     """---------------------------------------------------------------------------------
     Custom DataReader that can be used to read data from a specific format.
 
@@ -16,21 +14,32 @@ class PHReader(DataReader):
 
     ---------------------------------------------------------------------------------"""
 
-    class Parameters(BaseModel, extra=Extra.forbid):
-        """If your CustomDataReader should take any additional arguments from the
-        retriever configuration file, then those should be specified here.
+    def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
+        df = pd.read_csv(
+            input_key,
+            sep=" ",
+            header=None,
+            names=("date", "time", "temperature", "millivolts", "pH"),
+        )
+        df["time"] = df["date"] + " " + df["time"]
+        return df.to_xarray()
 
-        e.g.,:
-        custom_parameter: float = 5.0
 
-        """
+class SamiReader(DataReader):
+    """---------------------------------------------------------------------------------
+    Custom DataReader that can be used to read data from a specific format.
 
-    parameters: Parameters = Parameters()
-    """Extra parameters that can be set via the retrieval configuration file. If you opt
-    to not use any configuration parameters then please remove the code above."""
+    Built-in implementations of data readers can be found in the
+    [tsdat.io.readers](https://tsdat.readthedocs.io/en/latest/autoapi/tsdat/io/readers)
+    module.
+
+    ---------------------------------------------------------------------------------"""
 
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
-        df = pd.read_csv(input_key, sep=" ", header=None, names = ('date','time','temperature','millivolts','pH'))
-        df['time'] = df['date'] + ' ' + df['time']
-        df = df.drop(columns=['date', 'millivolts'])
+        df = pd.read_csv(
+            input_key,
+            sep="\t",
+            header=0,
+        )
+        df["time"] = df["DateStr"] + " " + df["TimeStr"]
         return df.to_xarray()

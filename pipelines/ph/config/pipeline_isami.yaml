@@ -1,13 +1,13 @@
 classname: pipelines.ph.pipeline.PH
 
 triggers:
-  - .*ph_.*\.txt
+  - .*SAMI.*\.txt
 
 retriever:
   path: pipelines/ph/config/retriever.yaml
 
 dataset:
-  path: pipelines/ph/config/dataset.yaml
+  path: pipelines/ph/config/dataset_isami.yaml
 
 quality:
   path: shared/quality.yaml

@@ -1,7 +1,9 @@
 classname: tsdat.io.retrievers.DefaultRetriever
 readers:
-  .*:
-    classname: pipelines.ph.readers.PHReader
+  .*ph_.*\.txt:
+    classname: pipelines.ph.readers.OnsetReader
+  .*SAMI.*\.txt:
+    classname: pipelines.ph.readers.SamiReader
 
 coords:
   time:
@@ -14,9 +16,17 @@ coords:
 
 data_vars:
   temperature:
-    .*:
+    .*ph_.*\.txt:
       name: temperature
-      
+    .*SAMI.*\.txt:
+      name: Temperature C
+
   pH:
-    .*:
+    .*ph_.*\.txt:
       name: pH
+    .*SAMI.*\.txt:
+      name: pHConstSal
+
+  salinity:
+    .*SAMI.*\.txt:
+      name: SalinityConst

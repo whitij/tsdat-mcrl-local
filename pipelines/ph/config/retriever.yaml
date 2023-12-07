@@ -16,17 +16,13 @@ coords:
 
 data_vars:
   temperature:
-    .*ph_.*\.txt:
+    .*:
       name: temperature
-    .*SAMI.*\.txt:
-      name: Temperature C
 
   pH:
-    .*ph_.*\.txt:
+    .*:
       name: pH
-    .*SAMI.*\.txt:
-      name: pHConstSal
 
   salinity:
-    .*SAMI.*\.txt:
+    .*SAMI.*:
       name: SalinityConst

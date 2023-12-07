@@ -42,4 +42,6 @@ class SamiReader(DataReader):
             header=0,
         )
         df["time"] = df["DateStr"] + " " + df["TimeStr"]
+        df["pH"] = df["pHConstSal"]
+        df["temperature"] = df["Temperature C"]
         return df.to_xarray()

@@ -20,7 +20,7 @@ coords:
 data_vars:
   example_var:
     dims: [time]
-    dtype: float32
+    dtype: float
     attrs:
       long_name:  Example Variable
       units: km

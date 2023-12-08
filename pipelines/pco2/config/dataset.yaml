@@ -1,13 +1,13 @@
 attrs:
-  Conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
+  conventions: "CD-1.6, ACDD-1.3, IOOS-1.2"
   featureType: timeseries
   id: MCRLdata_pco2
-  infoUrl: https://www.osti.gov/biblio/1842840
+  infoURL: https://www.osti.gov/biblio/1842840
   license: Freely Distributed
   naming_authority: gov.pnnl.sequim
   standard_name_vocabulary: CF Standard Name Table v79
   title: MCRLdata at PNNL-Sequim - pCO2
-  summary:
+  description:
     CO2 measurements from a Battelle Seaology pCO2 Monitor sensor. Measurements include
     two concurrent readings of CO2 partial pressure in the atmosphere and seawater.
 
@@ -45,7 +45,6 @@ attrs:
   qualifier: battelle_seaology_1
   temporal: 3hr
   data_level: a1
-  description: see summary
 
 coords:
   time:

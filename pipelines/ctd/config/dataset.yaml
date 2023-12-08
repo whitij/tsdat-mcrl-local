@@ -72,7 +72,7 @@ coords:
 data_vars:
   temp:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Water Temperature (degC)
       standard_name: sea_water_temperature
@@ -84,7 +84,7 @@ data_vars:
 
   do:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Dissolved Oxygen (mg/L)
       standard_name: mass_concentration_of_oxygen_in_sea_water
@@ -96,7 +96,7 @@ data_vars:
 
   salinity:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Salinity (psu)
       standard_name: sea_water_practical_salinity

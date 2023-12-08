@@ -70,7 +70,7 @@ coords:
 data_vars:
   windspeed_avg:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Average Wind Speed (m s-1)
       standard_name: wind_speed
@@ -83,7 +83,7 @@ data_vars:
 
   windspeed_max:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Maximum Wind Speed (m s-1)
       standard_name: wind_speed_of_gust
@@ -96,7 +96,7 @@ data_vars:
 
   winddir:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Wind Direction (deg)
       standard_name: wind_from_direction
@@ -113,7 +113,7 @@ data_vars:
 
   airtemp_avg:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Average Air Temperature (degC)
       standard_name: air_temperature
@@ -128,7 +128,7 @@ data_vars:
 
   rh:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Relative Humidity (%)
       standard_name: relative_humidity
@@ -143,7 +143,7 @@ data_vars:
 
   rain:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Total Rainfall (in)
       standard_name: thickness_of_rainfall_amount
@@ -158,7 +158,7 @@ data_vars:
 
   par_avg:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Average Photosynthetically Active Radiation Flux Density (umol m-2 s-1)
       standard_name: surface_downwelling_photosynthetic_photon_flux_in_air
@@ -177,7 +177,7 @@ data_vars:
 
   par_tot:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Total Photosynthetically Active Radiation (umol m-2)
       standard_name: surface_downwelling_photosynthetic_photon_flux_density_in_air
@@ -197,7 +197,7 @@ data_vars:
 
   baro_pressure:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Average Barometric Pressure (hPa)
       standard_name: air_pressure
@@ -212,7 +212,7 @@ data_vars:
 
   baro_temp:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Average Temperature of Barometer Sensor (degC)
       standard_name: temperature_of_sensor
@@ -225,7 +225,7 @@ data_vars:
 
   baro_qual_metric:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Barometer Quality Metric
       standard_name: quality_flag
@@ -240,7 +240,7 @@ data_vars:
 
   lower_par:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Lower Photosynthetically Active Radiation (PAR) Sensor
       standard_name: downwelling_photon_flux_in_sea_water
@@ -256,7 +256,7 @@ data_vars:
 
   upper_par:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Upper Photosynthetically Active Radiation (PAR) Sensor
       standard_name: downwelling_photon_flux_in_sea_water

@@ -80,7 +80,7 @@ coords:
 data_vars:
   spectra:
     dims: [time, frequency]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Sound Frequency Spectra (dB)
       standard_name: sound_pressure_level_in_water
@@ -94,7 +94,7 @@ data_vars:
 
   SPL:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Sound Pressure Level (dB)
       standard_name: sound_pressure_level_in_water
@@ -113,7 +113,7 @@ data_vars:
   # QA/QC checks should occur on the second order pipeline with NetCDF files
   temperature:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Internal Temperature (degC)
       standard_name: temperature_of_sensor_in_sea_water
@@ -128,7 +128,7 @@ data_vars:
 
   humidity:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Internal Relative Humidity (%)
       standard_name: relative_humidity_of_sensor_in_sea_water

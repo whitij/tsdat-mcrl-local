@@ -68,7 +68,7 @@ coords:
 data_vars:
   lower_par:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Lower Photosynthetically Active Radiation (PAR) Sensor
       standard_name: downwelling_photon_flux_in_sea_water
@@ -83,7 +83,7 @@ data_vars:
 
   upper_par:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Upper Photosynthetically Active Radiation (PAR) Sensor
       standard_name: downwelling_photon_flux_in_sea_water

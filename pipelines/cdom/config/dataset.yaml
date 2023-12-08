@@ -69,7 +69,7 @@ coords:
 data_vars:
   cdom:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Colored Dissolved Organic Matter - CDOM (ppb)
       standard_name: concentration_of_colored_dissolved_organic_matter_in_sea_water_expressed_as_equivalent_mass_fraction_of_quinine_sulfate_dihydrate
@@ -87,7 +87,7 @@ data_vars:
 
   phycoerythrin:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: Phycoerythrin (ppb)
       standard_name: phycoerythrin
@@ -102,7 +102,7 @@ data_vars:
 
   chlorophyll:
     dims: [time]
-    dtype: float
+    dtype: float32
     attrs:
       long_name: chlorophyll (ug/L)
       standard_name: mass_concentration_of_chlorophyll_in_sea_water

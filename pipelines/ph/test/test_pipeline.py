@@ -21,8 +21,8 @@ def test_ph_pipeline_isami():
     config = PipelineConfig.from_yaml(config_path)
     pipeline = config.instantiate_pipeline()
 
-    test_file = "pipelines/ph/test/data/input/SAMI Data Export.txt"
-    expected_file = "pipelines/ph/test/data/expected/ph.mcrl_pier-isami_ph_1-15min.a1.20230921.211000.nc"
+    test_file = "pipelines/ph/test/data/input/SAMI_Data_Export_20230921_212501.txt"
+    expected_file = "pipelines/ph/test/data/expected/ph.mcrl_pier-isami_ph_1-15min.a1.20230921.212501.nc"
 
     dataset = pipeline.run([test_file])
     expected: xr.Dataset = xr.open_dataset(expected_file)  # type: ignore

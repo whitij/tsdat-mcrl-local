@@ -22,6 +22,7 @@ class OnsetReader(DataReader):
             names=("date", "time", "temperature", "millivolts", "pH"),
         )
         df["time"] = df["date"] + " " + df["time"]
+
         return df.to_xarray()
 
 
@@ -38,10 +39,10 @@ class SamiReader(DataReader):
     def read(self, input_key: str) -> Union[xr.Dataset, Dict[str, xr.Dataset]]:
         df = pd.read_csv(
             input_key,
-            sep="\t",
+            sep=",",
             header=0,
         )
-        df["time"] = df["DateStr"] + " " + df["TimeStr"]
         df["pH"] = df["pHConstSal"]
         df["temperature"] = df["Temperature C"]
+
         return df.to_xarray()

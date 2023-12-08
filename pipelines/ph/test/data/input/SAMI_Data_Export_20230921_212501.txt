@@ -1,0 +1,3 @@
+,Year Day,Temperature C,SalinityConst,pHConstSal,Battery Voltage,DateStr,TimeStr,time
+1,264.8924,13.0,31.0,8.1135,10.61,2023-09-21,21:25:01,2023-09-21 21:25:01
+2,264.9028,13.14,31.0,8.1425,10.6,2023-09-21,21:40:01,2023-09-21 21:40:01

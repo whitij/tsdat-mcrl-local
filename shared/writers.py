@@ -1,4 +1,5 @@
 import shutil
+import logging
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -11,7 +12,9 @@ from tsdat import FileWriter
 from tsdat.tstring import Template
 from tsdat.config.storage import StorageConfig
 from tsdat.config.utils import recursive_instantiate
-from tsdat.tstring import Template
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_storage_class(data_folder):
@@ -59,22 +62,34 @@ def write_raw(input_key, config):
 
     # Manually set up save configuration and save raw file
     data_stub_path = Template(storage.parameters.data_storage_path.as_posix())
+    datastream = config.dataset.attrs.datastream
     datastream_dir = Path(
         data_stub_path.substitute(
             dict(
                 location_id=config.dataset.attrs.location_id,
-                datastream=config.dataset.attrs.datastream,
+                datastream=datastream,
                 year=year,
                 month=month,
                 day=day,
             ),
         )
     )
-    filepath = Path("storage/root") / datastream_dir / filename
-    filepath.parent.mkdir(exist_ok=True, parents=True)
-    shutil.copy(input_key, filepath)  # save file by moving it from source
-    # Using 'copy' on tsdat-mcrl-local, 'move' on tsdat-mcrl
+    try:
+        # Save to local computer
+        filepath = Path("storage/root") / datastream_dir / filename
+        filepath.parent.mkdir(exist_ok=True, parents=True)
+        shutil.copy(input_key, filepath)  # save file by moving it from source
 
+    except:
+        # Save to S3 bucket
+        standard_fpath = datastream_dir / filename
+        storage._bucket.upload_file(Filename=input_key, Key=standard_fpath.as_posix())
+        logger.info(
+            "Saved %s data file to s3://%s/%s",
+            datastream,
+            storage.parameters.bucket,
+            standard_fpath,
+        )
 
 def write_parquet(dataset):
     """----------------------------------------------------------------------------

@@ -46,4 +46,7 @@ class DimensionTranspose(DataConverter):
 
         ----------------------------------------------------------------------------"""
 
-        return data.T
+        if len(data.shape) > 1:
+            data = data.T
+
+        return data

@@ -2,6 +2,7 @@ classname: tsdat.io.storage.FileSystem
 parameters:
   data_storage_path: "{location_id}/{datastream}/netcdf/{year}/{month}/{day}"
   ancillary_storage_path: "{location_id}/{datastream}/ancillary/{year}/{month}/{day}"
+  ancillary_filename_template: "{datastream}.{year}{month}{day}.{title}.{extension}"
 
 handler:
   classname: tsdat.io.handlers.NetCDFHandler

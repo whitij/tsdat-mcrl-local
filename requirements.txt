@@ -1,5 +1,4 @@
-tsdat >=0.7.1
-cmocean  
-notebook
-act-atmos
-mhkit
+tsdat>=0.7.4
+cmocean
+typer
+dolfyn

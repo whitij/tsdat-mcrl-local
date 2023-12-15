@@ -4,7 +4,7 @@ import xarray as xr
 import numpy as np
 
 from tsdat import DataReader
-import mhkit.dolfyn as dolfyn
+import dolfyn
 
 
 class ADCPDataReader(DataReader):
@@ -42,10 +42,5 @@ class ADCPDataReader(DataReader):
         u_dir = dat["U_dir"].values
         u_dir[u_dir > 180] -= 360
         dat["U_dir"].values = u_dir
-
-        # Set time to be the first dimension
-        for var in dat.data_vars:
-            if len(dat[var].shape) > 1:
-                dat[var] = dat[var].T
 
         return dat

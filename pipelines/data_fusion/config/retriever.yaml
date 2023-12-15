@@ -21,12 +21,9 @@ coords:
     data_converters:
       - classname: tsdat.transform.CreateTimeGrid
         interval: 5min
-  range:
-    .*adcp.*:
-      name: range
-  frequency:
-    .*hydrophone.*:
-      name: frequency
+  # range:
+  #   .*adcp.*:
+  #     name: range
 
 data_vars:
   water_level:
@@ -35,16 +32,18 @@ data_vars:
       data_converters:
         - classname: tsdat.transform.NearestNeighbor
 
-  U_mag:
-    .*adcp.*:
-      name: U_mag
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-  U_dir:
-    .*adcp.*:
-      name: U_dir
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
+  # U_mag:
+  #   .*adcp.*:
+  #     name: U_mag
+  #     data_converters:
+  #       - classname: pipelines.data_fusion.converters.DimensionTranspose
+  #       - classname: tsdat.transform.NearestNeighbor
+  # U_dir:
+  #   .*adcp.*:
+  #     name: U_dir
+  #     data_converters:
+  #       - classname: pipelines.data_fusion.converters.DimensionTranspose
+  #       - classname: tsdat.transform.NearestNeighbor
 
   temp:
     .*ctd.*:
@@ -62,27 +61,21 @@ data_vars:
       data_converters:
         - classname: tsdat.transform.NearestNeighbor
 
-  cdom:
-    .*cdom.*:
-      name: cdom
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-  phycoerythrin:
-    .*cdom.*:
-      name: phycoerythrin
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-  chlorophyll:
-    .*cdom.*:
-      name: chlorophyll
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
-
-  spectra:
-    .*hydrophone.*:
-      name: spectra
-      data_converters:
-        - classname: tsdat.transform.NearestNeighbor
+  # cdom:
+  #   .*cdom.*:
+  #     name: cdom
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
+  # phycoerythrin:
+  #   .*cdom.*:
+  #     name: phycoerythrin
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
+  # chlorophyll:
+  #   .*cdom.*:
+  #     name: chlorophyll
+  #     data_converters:
+  #       - classname: tsdat.transform.NearestNeighbor
 
   SPL:
     .*hydrophone.*:

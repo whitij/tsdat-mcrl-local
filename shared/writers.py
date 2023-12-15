@@ -6,7 +6,7 @@ import xarray as xr
 from pathlib import Path
 from pydantic import BaseModel, Extra
 from typing import Any, Dict, List, Optional
-from mhkit.dolfyn.time import dt642epoch
+from dolfyn.time import dt642epoch
 
 from tsdat import FileWriter
 from tsdat.tstring import Template
@@ -90,6 +90,7 @@ def write_raw(input_key, config):
             storage.parameters.bucket,
             standard_fpath,
         )
+
 
 def write_parquet(dataset):
     """----------------------------------------------------------------------------

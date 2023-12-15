@@ -22,6 +22,21 @@
             "program": "${file}",
             "justMyCode": false,
             "console": "integratedTerminal",
+        },
+        {
+            "name": "Debug VAP",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}//runner.py",
+            "console": "integratedTerminal",
+            "args": [
+                "vap",
+                "pipelines/data_fusion/config/pipeline.yaml",
+                "--begin",
+                "20230401.000000",
+                "--end",
+                "20230402.000000"
+            ]
         }
     ]
 }

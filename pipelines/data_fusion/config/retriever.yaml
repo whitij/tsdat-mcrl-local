@@ -32,12 +32,23 @@ data_vars:
       data_converters:
         - classname: tsdat.transform.NearestNeighbor
 
+  # qc_U_mag:
+  #   .*adcp.*:
+  #     name: qc_U_mag
+  #     data_converters:
+  #       - classname: pipelines.data_fusion.converters.DimensionTranspose
   # U_mag:
   #   .*adcp.*:
   #     name: U_mag
   #     data_converters:
   #       - classname: pipelines.data_fusion.converters.DimensionTranspose
   #       - classname: tsdat.transform.NearestNeighbor
+
+  # qc_U_dir:
+  #   .*adcp.*:
+  #     name: qc_U_dir
+  #     data_converters:
+  #       - classname: pipelines.data_fusion.converters.DimensionTranspose
   # U_dir:
   #   .*adcp.*:
   #     name: U_dir
@@ -66,11 +77,13 @@ data_vars:
   #     name: cdom
   #     data_converters:
   #       - classname: tsdat.transform.NearestNeighbor
+
   # phycoerythrin:
   #   .*cdom.*:
   #     name: phycoerythrin
   #     data_converters:
   #       - classname: tsdat.transform.NearestNeighbor
+
   # chlorophyll:
   #   .*cdom.*:
   #     name: chlorophyll

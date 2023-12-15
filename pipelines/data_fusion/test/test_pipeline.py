@@ -12,7 +12,7 @@ from tsdat import assert_close, PipelineConfig, TransformationPipeline
 # for github actions CI/CD), update the line below to point to the correct folder and
 # test name
 @pytest.mark.dependency(depends=["../../tide_guage/test/test_pipeline.py"])
-def test_vap_foo_pipeline():
+def test_data_fusion_pipeline():
     # The transformation pipeline will likely depend on the output of an ingestion
     # pipeline. To account for this we first run the ingest to generate input data for
     # the vap, and then run the vap test. Please update the line below to point to the

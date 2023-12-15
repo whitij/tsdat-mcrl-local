@@ -57,7 +57,7 @@ data_vars:
   #   attrs:
   #     long_name: Water Direction
   #     standard_name: sea_water_to_direction
-  #     units: degree
+  #     units: degree_CW_from_North
   #     coverage_content_type: physicalMeasurement
   #     fail_min: -180
   #     fail_max: 180

@@ -127,4 +127,4 @@ if __name__ == "__main__":
     app()
 
 # python runner.py ingest storage/test_data/tide_gauge/2023/04/01/*.log
-# python runner.py vap pipelines/data_fusion/config/pipeline.yaml --begin 20230401.000000 --end 20230402.000000 --verbose
+# python runner.py vap pipelines/data_fusion/config/pipeline.yaml --begin 20230401.000000 --end 20230402.000000
